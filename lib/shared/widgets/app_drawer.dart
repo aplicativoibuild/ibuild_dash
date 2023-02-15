@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../src/routes/routes_model.dart';
 
 String userName = '';
 String userAvatar = '';
@@ -23,29 +24,42 @@ class DrawerDefault extends StatelessWidget {
                     Text("espaço para img")
                     //  Image(
                     //   image: AssetImage('lib/assets/images/logo.jpeg'),
-                    // ), 
+                    // ),
                   ],
                 ),
                 decoration: const BoxDecoration(color: Colors.white),
               ),
               ListTile(
                 leading: Icon(Icons.home_outlined,
-                    size: constraints.maxWidth * .08,
-                    color: Colors.blue),
-                title: Text('Analitcs',
+                    size: constraints.maxWidth * .08, color: Colors.blue),
+                title: Text('Analytics',
                     style: TextStyle(
                       fontSize: 19,
                       color: Colors.blue,
                       fontWeight: FontWeight.w300,
                     )),
                 onTap: () {
-                    //navKey.currentState?.pushNamedAndRemoveUntil(Routes.home, (route) => false);
+                  navKey.currentState
+                      ?.pushNamedAndRemoveUntil(Routes.home, (route) => false);
                 },
               ),
-                 ListTile(
+              ListTile(
+                leading: Icon(Icons.subscriptions_outlined,
+                    size: constraints.maxWidth * .08, color: Colors.blue),
+                title: const Text('Assinantes Externos',
+                    style: TextStyle(
+                      fontSize: 19,
+                      color: Colors.blue,
+                      fontWeight: FontWeight.w300,
+                    )),
+                onTap: () {
+                  navKey.currentState?.pushNamedAndRemoveUntil(
+                      Routes.externalSubscribers, (route) => false);
+                },
+              ),
+              ListTile(
                 leading: Icon(Icons.person_add_alt,
-                    size: constraints.maxWidth * .08,
-                    color: Colors.blue),
+                    size: constraints.maxWidth * .08, color: Colors.blue),
                 title: Text('Novos',
                     style: TextStyle(
                       fontSize: 19,
@@ -58,8 +72,7 @@ class DrawerDefault extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(Icons.people_outline,
-                    size: constraints.maxWidth * .08,
-                    color: Colors.blue),
+                    size: constraints.maxWidth * .08, color: Colors.blue),
                 title: Text('Parceiros',
                     style: TextStyle(
                       fontSize: 19,
@@ -67,13 +80,12 @@ class DrawerDefault extends StatelessWidget {
                       fontWeight: FontWeight.w300,
                     )),
                 onTap: () {
-                 // navKey.currentState?.pushNamed(Routes.parameters);
+                  // navKey.currentState?.pushNamed(Routes.parameters);
                 },
               ),
-               ListTile(
+              ListTile(
                 leading: Icon(Icons.comment_outlined,
-                    size: constraints.maxWidth * .08,
-                    color: Colors.blue),
+                    size: constraints.maxWidth * .08, color: Colors.blue),
                 title: Text('Comentários',
                     style: TextStyle(
                       fontSize: 19,
@@ -81,14 +93,12 @@ class DrawerDefault extends StatelessWidget {
                       fontWeight: FontWeight.w300,
                     )),
                 onTap: () {
-                 // navKey.currentState?.pushNamed(Routes.parameters);
+                  // navKey.currentState?.pushNamed(Routes.parameters);
                 },
               ),
-
-             ListTile(
+              ListTile(
                 leading: Icon(Icons.people_alt_outlined,
-                    size: constraints.maxWidth * .08,
-                    color: Colors.blue),
+                    size: constraints.maxWidth * .08, color: Colors.blue),
                 title: Text('Alterações',
                     style: TextStyle(
                       fontSize: 19,
@@ -96,14 +106,12 @@ class DrawerDefault extends StatelessWidget {
                       fontWeight: FontWeight.w300,
                     )),
                 onTap: () {
-                 // navKey.currentState?.pushNamed(Routes.parameters);
+                  // navKey.currentState?.pushNamed(Routes.parameters);
                 },
               ),
-
-                ListTile(
+              ListTile(
                 leading: Icon(Icons.assignment,
-                    size: constraints.maxWidth * .08,
-                    color: Colors.blue),
+                    size: constraints.maxWidth * .08, color: Colors.blue),
                 title: Text('Pedidos',
                     style: TextStyle(
                       fontSize: 19,
@@ -111,14 +119,12 @@ class DrawerDefault extends StatelessWidget {
                       fontWeight: FontWeight.w300,
                     )),
                 onTap: () {
-                 // navKey.currentState?.pushNamed(Routes.parameters);
+                  // navKey.currentState?.pushNamed(Routes.parameters);
                 },
               ),
-
-                ListTile(
+              ListTile(
                 leading: Icon(Icons.assignment_add,
-                    size: constraints.maxWidth * .08,
-                    color: Colors.blue),
+                    size: constraints.maxWidth * .08, color: Colors.blue),
                 title: Text('Caixa de entrada de pedidos',
                     style: TextStyle(
                       fontSize: 19,
@@ -126,14 +132,12 @@ class DrawerDefault extends StatelessWidget {
                       fontWeight: FontWeight.w300,
                     )),
                 onTap: () {
-                 // navKey.currentState?.pushNamed(Routes.parameters);
+                  // navKey.currentState?.pushNamed(Routes.parameters);
                 },
               ),
-
-                ListTile(
+              ListTile(
                 leading: Icon(Icons.emoji_people,
-                    size: constraints.maxWidth * .08,
-                    color: Colors.blue),
+                    size: constraints.maxWidth * .08, color: Colors.blue),
                 title: Text('Colaboradores',
                     style: TextStyle(
                       fontSize: 19,
@@ -141,15 +145,12 @@ class DrawerDefault extends StatelessWidget {
                       fontWeight: FontWeight.w300,
                     )),
                 onTap: () {
-                 // navKey.currentState?.pushNamed(Routes.parameters);
+                  // navKey.currentState?.pushNamed(Routes.parameters);
                 },
               ),
-
-
-                              ListTile(
+              ListTile(
                 leading: Icon(Icons.notification_add_outlined,
-                    size: constraints.maxWidth * .08,
-                    color: Colors.blue),
+                    size: constraints.maxWidth * .08, color: Colors.blue),
                 title: Text('Envio de notificações',
                     style: TextStyle(
                       fontSize: 19,
@@ -157,15 +158,12 @@ class DrawerDefault extends StatelessWidget {
                       fontWeight: FontWeight.w300,
                     )),
                 onTap: () {
-                 // navKey.currentState?.pushNamed(Routes.parameters);
+                  // navKey.currentState?.pushNamed(Routes.parameters);
                 },
               ),
-
-
-                ListTile(
+              ListTile(
                 leading: Icon(Icons.rule_sharp,
-                    size: constraints.maxWidth * .08,
-                    color: Colors.blue),
+                    size: constraints.maxWidth * .08, color: Colors.blue),
                 title: Text('Regras',
                     style: TextStyle(
                       fontSize: 19,
@@ -173,7 +171,7 @@ class DrawerDefault extends StatelessWidget {
                       fontWeight: FontWeight.w300,
                     )),
                 onTap: () {
-                 // navKey.currentState?.pushNamed(Routes.parameters);
+                  // navKey.currentState?.pushNamed(Routes.parameters);
                 },
               ),
               ListTile(
@@ -184,10 +182,10 @@ class DrawerDefault extends StatelessWidget {
                   ),
                   title: Text('Sair',
                       style: TextStyle(
-                      fontSize: 19,
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w300,
-                    )),
+                        fontSize: 19,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.w300,
+                      )),
                   onTap: () async {
                     // SharedPreferences prefs =
                     //     await SharedPreferences.getInstance();
