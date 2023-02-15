@@ -5,9 +5,10 @@ import 'package:ibuild_dash/src/ui/home/presentation/widgets/line_chart_mini.dar
 class CardChart extends StatelessWidget {
   String title;
   String value;
+  int valueChartMini;
   Color colorText;
   Color colorBackgroud;
-  CardChart({Key? key, required this.title, required this.value, required this.colorText, required this.colorBackgroud }) : super(key: key);
+  CardChart({Key? key, required this.title, required this.value, required this.valueChartMini, required this.colorText, required this.colorBackgroud }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

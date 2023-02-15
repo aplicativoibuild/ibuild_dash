@@ -8,7 +8,6 @@ import 'package:ibuild_dash/src/ui/home/presentation/stores/home_store.dart';
 import 'package:ibuild_dash/src/ui/home/presentation/widgets/line_chart.dart';
 
 class HomeScreen extends StatefulWidget {
-  
   const HomeScreen({
     Key? key,
     //required this.store,
@@ -19,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-    final store = HomeStore();
+  final store = HomeStore();
 
   @override
   void initState() {
@@ -33,20 +32,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return 
-       Scaffold(
+    return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBarDefault(),
         drawer: DrawerDefault(),
-        body: _buildBody(context)
-       );
+        body: _buildBody(context));
   }
-    _buildBody(context) {
+
+  _buildBody(context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       child: Center(
-        child: SizedBox(
+          child: SizedBox(
         width: width * 0.85,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,170 +53,307 @@ class _HomeScreenState extends State<HomeScreen> {
               text: const TextSpan(
                 text: 'Seja bem-vindo, ',
                 style: TextStyle(
-              fontSize: 19,
-              color: Colors.blue,
-              fontWeight: FontWeight.w300,
-            ),
+                  fontSize: 19,
+                  color: Colors.blue,
+                  fontWeight: FontWeight.w300,
+                ),
               ),
             ),
             const Padding(
               padding: EdgeInsets.only(top: 8.0),
-              child: Text(
-                  'Você está em: Analitics',
+              child: Text('Você está em: Analitics',
                   style: TextStyle(
-              fontSize: 14,
-              color: Colors.blue,
-              fontWeight: FontWeight.w300,
-            )),
+                    fontSize: 14,
+                    color: Colors.blue,
+                    fontWeight: FontWeight.w300,
+                  )),
             ),
-           const Divider(
+            const Divider(
               color: Colors.blue,
               height: 15,
             ),
-             Center(
-                   child: SizedBox(
-                      height: 600,
-                      child: Column(
-                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [ 
-                      Row(
+            Center(
+              child: SizedBox(
+                height: 600,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        child: 
-                        IgnorePointer(child: CardChart(title: "Parceiros",value: "1093", colorText: Colors.black, colorBackgroud: Colors.white)),
-                        onTap: (){
-                          setState(() {
-                            graphicVisible = true;
-                            graphicName = 'Parceiros';
-                            icon = Icons.people_outline;
-                          });
-                        },
+                        FutureBuilder<int>(
+                          future: store.getAllPartners(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Padding(
+                                padding: EdgeInsets.only(top: 50),
+                                child: CircularProgressIndicator(),
+                              );
+                            } else {
+                              return GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                child: IgnorePointer(
+                                    child: CardChart(
+                                        title: "Parceiros",
+                                        value: snapshot.data.toString(),
+                                        valueChartMini: snapshot.data!,
+                                        colorText: Colors.black,
+                                        colorBackgroud: Colors.white)),
+                                onTap: () {
+                                  setState(() {
+                                    graphicVisible = true;
+                                    graphicName = 'Parceiros';
+                                    icon = Icons.people_outline;
+                                  });
+                                },
+                              );
+                            }
+                          },
                         ),
-                        GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        child: 
-                        IgnorePointer(child: CardChart(title: "Usuários",value: "1093", colorText: Colors.black, colorBackgroud: Colors.white)),
-                        onTap: (){
-                          setState(() {
-                            graphicVisible = true;
-                            graphicName = 'Usuários';
-                            icon = Icons.people_outline;
-                          });
-                        },
+                        FutureBuilder<int>(
+                          future: store.getAllUsers(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Padding(
+                                padding: EdgeInsets.only(top: 50),
+                                child: CircularProgressIndicator(),
+                              );
+                            } else {
+                              return GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                child: IgnorePointer(
+                                    child: CardChart(
+                                        title: "Usuários",
+                                        value: snapshot.data.toString(),
+                                        valueChartMini: snapshot.data!,
+                                        colorText: Colors.black,
+                                        colorBackgroud: Colors.white)),
+                                onTap: () {
+                                  setState(() {
+                                    graphicVisible = true;
+                                    graphicName = 'Usuários';
+                                    icon = Icons.people_outline;
+                                  });
+                                },
+                              );
+                            }
+                          },
                         ),
-                        GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        child: 
-                        IgnorePointer(child: CardChart(title: "Pagantes",value: "1093", colorText: Colors.black, colorBackgroud: Colors.white)),
-                        onTap: (){
-                          setState(() {
-                            graphicVisible = true;
-                            graphicName = 'Pagantes';
-                            icon = Icons.monetization_on_rounded;
-                          });
-                        },
+                        FutureBuilder<int>(
+                          future: store.getAllPayingUsers(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Padding(
+                                padding: EdgeInsets.only(top: 50),
+                                child: CircularProgressIndicator(),
+                              );
+                            } else {
+                              return GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                child: IgnorePointer(
+                                    child: CardChart(
+                                        title: "Pagantes",
+                                        value: snapshot.data.toString(),
+                                        valueChartMini: snapshot.data!,
+                                        colorText: Colors.black,
+                                        colorBackgroud: Colors.white)),
+                                onTap: () {
+                                  setState(() {
+                                    graphicVisible = true;
+                                    graphicName = 'Pagantes';
+                                    icon = Icons.monetization_on_rounded;
+                                  });
+                                },
+                              );
+                            }
+                          },
                         ),
-                       GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        child: 
-                        IgnorePointer(child: CardChart(title: "Não Pagantes",value: "1093", colorText: Colors.black, colorBackgroud: Colors.white)),
-                        onTap: (){
-                          setState(() {
-                            graphicVisible = true;
-                            graphicName = 'Não Pagantes';
-                            icon = Icons.money_off;
-                          });
-                        },
+                        FutureBuilder<int>(
+                          future: store.getAllNotPayingUsers(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Padding(
+                                padding: EdgeInsets.only(top: 50),
+                                child: CircularProgressIndicator(),
+                              );
+                            } else {
+                              return GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                child: IgnorePointer(
+                                    child: CardChart(
+                                        title: "Não Pagantes",
+                                        value: snapshot.data.toString(),
+                                        valueChartMini: snapshot.data!,
+                                        colorText: Colors.black,
+                                        colorBackgroud: Colors.white)),
+                                onTap: () {
+                                  setState(() {
+                                    graphicVisible = true;
+                                    graphicName = 'Não Pagantes';
+                                    icon = Icons.money_off;
+                                  });
+                                },
+                              );
+                            }
+                          },
                         ),
                       ],
-                      ),
-    
-                     Row(
+                    ),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        child: 
-                        IgnorePointer(child: CardChart(title: "Comentários",value: "1093", colorText: Colors.black, colorBackgroud: Colors.white)),
-                        onTap: (){
-                          setState(() {
-                            graphicVisible = true;
-                            graphicName = 'Comentários';
-                            icon = Icons.comment_outlined;
-                          });
-                        },
+                        FutureBuilder<int>(
+                          future: store.getComments(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Padding(
+                                padding: EdgeInsets.only(top: 50),
+                                child: CircularProgressIndicator(),
+                              );
+                            } else {
+                              return GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                child: IgnorePointer(
+                                    child: CardChart(
+                                        title: "Comentários",
+                                        value: snapshot.data.toString(),
+                                        valueChartMini: snapshot.data!,
+                                        colorText: Colors.black,
+                                        colorBackgroud: Colors.white)),
+                                onTap: () {
+                                  setState(() {
+                                    graphicVisible = true;
+                                    graphicName = 'Comentários';
+                                    icon = Icons.comment_outlined;
+                                  });
+                                },
+                              );
+                            }
+                          },
                         ),
-                        GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        child: 
-                        IgnorePointer(child: CardChart(title: "Pedidos de orçamentos recebidos",value: "1093", colorText: Colors.black, colorBackgroud: Colors.white)),
-                        onTap: (){
-                          setState(() {
-                            graphicVisible = true;
-                            graphicName = 'Pedidos de orçamentos recebidos';
-                            icon = Icons.assignment;
-                          });
-                        },
+                        FutureBuilder<int>(
+                          future: store.getAllPartners(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Padding(
+                                padding: EdgeInsets.only(top: 50),
+                                child: CircularProgressIndicator(),
+                              );
+                            } else {
+                              return GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                child: IgnorePointer(
+                                    child: CardChart(
+                                        title:
+                                            "Pedidos de orçamentos recebidos",
+                                        value: snapshot.data.toString(),
+                                        valueChartMini: snapshot.data!,
+                                        colorText: Colors.black,
+                                        colorBackgroud: Colors.white)),
+                                onTap: () {
+                                  setState(() {
+                                    graphicVisible = true;
+                                    graphicName =
+                                        'Pedidos de orçamentos recebidos';
+                                    icon = Icons.assignment;
+                                  });
+                                },
+                              );
+                            }
+                          },
                         ),
-
-                        GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        child: 
-                        IgnorePointer(child: CardChart(title: "Orçamentos totais",value: "1093", colorText: Colors.black, colorBackgroud: Colors.white)),
-                        onTap: (){
-                          setState(() {
-                            graphicVisible = true;
-                            graphicName = 'Orçamentos totais';
-                            icon = Icons.assignment;
-                          });
-                        },
+                        FutureBuilder<int>(
+                          future: store.getAllPartners(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Padding(
+                                padding: EdgeInsets.only(top: 50),
+                                child: CircularProgressIndicator(),
+                              );
+                            } else {
+                              return GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                child: IgnorePointer(
+                                    child: CardChart(
+                                        title: "Orçamentos totais",
+                                        value: snapshot.data.toString(),
+                                        valueChartMini: snapshot.data!,
+                                        colorText: Colors.black,
+                                        colorBackgroud: Colors.white)),
+                                onTap: () {
+                                  setState(() {
+                                    graphicVisible = true;
+                                    graphicName = 'Orçamentos totais';
+                                    icon = Icons.assignment;
+                                  });
+                                },
+                              );
+                            }
+                          },
                         ),
-
-                        GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        child: 
-                        IgnorePointer(child: CardChart(title: "Parceiros ativos",value: "1093", colorText: Colors.black, colorBackgroud: Colors.white)),
-                        onTap: (){
-                          setState(() {
-                            graphicVisible = true;
-                            graphicName = 'Parceiros ativos';
-                            icon = Icons.people_outline;
-                          });
-                        },
+                        FutureBuilder<int>(
+                          future: store.getAllPartners(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Padding(
+                                padding: EdgeInsets.only(top: 50),
+                                child: CircularProgressIndicator(),
+                              );
+                            } else {
+                              return GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                child: IgnorePointer(
+                                    child: CardChart(
+                                        title: 'Parceiros ativos',
+                                        value: snapshot.data.toString(),
+                                        valueChartMini: snapshot.data!,
+                                        colorText: Colors.black,
+                                        colorBackgroud: Colors.white)),
+                                onTap: () {
+                                  setState(() {
+                                    graphicVisible = true;
+                                    graphicName = 'Parceiros ativos';
+                                    icon = Icons.people_outline;
+                                  });
+                                },
+                              );
+                            }
+                          },
                         ),
                       ],
-                      ),
-    
-                   Expanded(
-                     child: Visibility(
-                        visible: graphicVisible,
-                        child: Column(
-                          children: [
-                          TitleChart(title: graphicName, icon: icon,),
-                          FilterChart(title: "Filtros..."),
-                          const SizedBox(height: 10,),
-                          const LineChartWidget(color: Colors.blue)
-                          ],
-                   
-                      )),
-                   ),
-    
-                    
-                    
-                    ],
-
-
                     ),
+                    Expanded(
+                      child: Visibility(
+                          visible: graphicVisible,
+                          child: Column(
+                            children: [
+                              TitleChart(
+                                title: graphicName,
+                                icon: icon,
+                              ),
+                              FilterChart(title: "Filtros..."),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const LineChartWidget(color: Colors.blue)
+                            ],
+                          )),
                     ),
-                   
-                  ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
-      )
-      ),
+      )),
     );
   }
 }
-
