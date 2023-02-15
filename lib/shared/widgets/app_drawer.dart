@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ibuild_dash/src/routes/routes_model.dart';
 
 
 String userName = '';
@@ -41,6 +42,20 @@ class DrawerDefault extends StatelessWidget {
                 onTap: () {
                     //navKey.currentState?.pushNamedAndRemoveUntil(Routes.home, (route) => false);
                 },
+              ),
+
+              ListTile(
+                leading: Icon(Icons.subscriptions_outlined,
+                    size: constraints.maxWidth * .08, color: Colors.blue),
+                title: const Text('Assinantes Externos',
+                    style: TextStyle(
+                      fontSize: 19,
+                      color: Colors.blue,
+                      fontWeight: FontWeight.w300,
+                    )),
+                onTap: () {
+                  navKey.currentState?.pushNamed(Routes.externalSubscribers);
+                }
               ),
                  ListTile(
                 leading: Icon(Icons.person_add_alt,
