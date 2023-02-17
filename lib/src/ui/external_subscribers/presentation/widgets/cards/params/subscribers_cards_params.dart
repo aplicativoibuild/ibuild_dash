@@ -12,7 +12,7 @@ class SubscribersCardParams extends Equatable {
   final String title;
 
   /// Titulo do Card
-  final String number;
+  final int number;
 
   /// Função ao clicar no Card
   final VoidCallback onTap;

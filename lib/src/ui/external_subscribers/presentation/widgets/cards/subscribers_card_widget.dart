@@ -33,10 +33,10 @@ class _SubscribersCardWidgetState extends State<SubscribersCardWidget> {
                         TextStyle(fontSize: 4.sp, fontWeight: FontWeight.w500),
                   ),
                   if (widget.params.icon != null) ...[
-                    Icon(widget.params.icon, size: 80)
+                    Icon(widget.params.icon, size: 70)
                   ] else ...[
                     Text(
-                      widget.params.number,
+                      widget.params.number.toString(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 7.sp, fontWeight: FontWeight.w500),
